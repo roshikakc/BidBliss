@@ -1,5 +1,5 @@
 <?php
-include 'admin_header.php'
+include 'include/admin_header.php'
 ?>
 
 <!DOCTYPE html>
@@ -7,6 +7,8 @@ include 'admin_header.php'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
     <title>Product</title>
 </head>
 <body>
@@ -34,42 +36,42 @@ include 'admin_header.php'
     <section class="product-list">
 
         <div class="product-card">
-            <img src="./Image/Bell.jpg" alt="Product Image">
+            <img src="./assets/Image/Bell.jpg" alt="Product Image">
             <p>Starting Price: <span>Rs10000</span></p>
             <p>Name: <span>Sample Product</span></p>
             <button>Edit</button>
             <button>Delete</button>
         </div>
         <div class="product-card">
-            <img src="./Image/Bell.jpg" alt="Product Image">
+            <img src="./assets/Image/Bell.jpg" alt="Product Image">
             <p>Starting Price: <span>Rs10000</span></p>
             <p>Name: <span>Sample Product</span></p>
             <button>Edit</button>
             <button>Delete</button>
         </div>
         <div class="product-card">
-            <img src="./Image/Bell.jpg" alt="Product Image">
+            <img src="./assets/Image/Bell.jpg" alt="Product Image">
             <p>Starting Price: <span>Rs10000</span></p>
             <p>Name: <span>Sample Product</span></p>
             <button>Edit</button>
             <button>Delete</button>
         </div>
         <div class="product-card">
-            <img src="./Image/Bell.jpg" alt="Product Image">
+            <img src="./assets/Image/Bell.jpg" alt="Product Image">
             <p>Starting Price: <span>Rs10000</span></p>
             <p>Name: <span>Sample Product</span></p>
             <button>Edit</button>
             <button>Delete</button>
         </div>
         <div class="product-card">
-            <img src="./Image/Bell.jpg" alt="Product Image">
+            <img src="./assets/Image/Bell.jpg" alt="Product Image">
             <p>Starting Price: <span>Rs10000</span></p>
             <p>Name: <span>Sample Product</span></p>
             <button>Edit</button>
             <button>Delete</button>
         </div>
         <div class="product-card">
-            <img src="./Image/Bell.jpg" alt="Product Image">
+            <img src="./assets/Image/Bell.jpg" alt="Product Image">
             <p>Starting Price: <span>Rs10000</span></p>
             <p>Name: <span>Sample Product</span></p>
             <button>Edit</button>
@@ -79,7 +81,7 @@ include 'admin_header.php'
     </section>
 
     <?php
-    include 'footer.php'
+    include 'include/footer.php'
     ?>
 </body>
 </html>

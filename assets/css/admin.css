@@ -8,175 +8,6 @@
     font-style: normal;
 }
 
-/* Navbar */
-header {
-    background-color: #000235;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-}
-
-.logo img {
-    height: 120px; 
-    max-width: 100%; 
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-}
-
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    padding-right: 150px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 5px; /* Space between each link */
-    font-size: 20px;
-}
-
-/* Style for the icon on the right */
-.nav-icon {
-    margin-left: auto;
-    font-size: 20px;
-    color: white;
-}
-
-/* Dashboard Content */
-main {
-    padding: 2rem;
-    text-align: center;
-}
-
-.dashboard-header {
-    position: relative;
-    height: 250px;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-    width: 80vw;
-    height: 80vh;
-    background-image: url('./Image/dashboard.png'); 
-    background-size: cover;  
-    background-position: center; 
-    background-repeat: no-repeat; 
-    padding-left: 250px;
-
-}
-
-.header-background {
-    text-align: center;
-    
-}
-
-.dashboard-header h1 {
-    font-size: 100px;
-    margin: 0;
-    color: #000000;
-}
-
-.dashboard-header p {
-    font-size: 50px;
-    margin: 1rem 0 0;
-    color: #666;
-}
-
-
-
-/* Footer */
-.f-logo img {
-    height: 170px; 
-    max-width: 100%; 
-    margin-top: -150px;
-}
-
-.f-logo {
-    display: flex;
-    align-items: center;
-}
-
-footer .container{
-    background-color: #000235;
-    /* padding: 4rem; */
-}
-
-.row{
-    display: flex;
-    justify-content: space-between;
-    padding: 80px 100px;
-}
-
-.footer-col ul{
-    list-style: none;
-}
-
-.footer-col h4{
-    color: white;
-    margin-bottom: 15px;
-    font-size: 22px;
-    position: relative;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    margin-top: -30px;
-}
-
-
-.footer-col ul li{
-    padding: 10px 0;
-}
-.footer-col ul li a{
-    color: #d9d9d9;
-    text-decoration: none;
-    font-size: 16px;
-    opacity: 0.7;
-    transition: 0.5s;
-}
-
-.row .socialIcons {
-    position: absolute;
-    padding-top: 130px;
-    right: 20px;
-}
-
-.row .socialIcons a {
-    color: white;
-    font-size: 20px;
-    margin: 0 10px;
-    transition: 0.5s;
-}
-.row .col {
-    position: absolute;
-    padding-top: 130px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-}
-
-.col p {
-    color: #d9d9d9;
-    font-size: 14px;
-    margin: 0;
-}
-
-.row .socialIcons i:hover{
-    color: #e91e64;
-}
-
-
-
 /* admin_page */
 .info-cards {
     display: flex;
@@ -376,3 +207,65 @@ tbody tr:hover{
     background-color: #000235;
     color: #ffffff;
 }
+
+/* Register page */
+a{
+    text-decoration: none;
+}
+
+.btn{
+    padding: 0.8rem 2.5rem ;
+    text-transform: uppercase;
+    background: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btn:hover{
+    background: rgb(77, 77, 77);
+}
+
+input{ 
+    background: transparent;
+}
+
+input[type=submit]{
+    cursor: pointer;
+    background: black;
+}
+
+.form-container{
+    background: #9497ee;
+    width: 100%;
+    min-height: 100vh;
+    padding: 4rem 0;
+    position: relative;
+}
+.form-container h1{
+    text-transform: uppercase;
+    margin: 2rem 0;
+    font-size: 2.3rem;
+    text-align: center;
+}
+.form-container form{
+    width: 60%;
+    margin: 1rem auto;
+    background: rgb(255 255 255/80%);
+    box-shadow: 0px 0px 0px 6px rgb(255 255 255/40%);
+    padding: 2rem;
+    position: relative;
+    border-radius: 5px;
+}
+.form-container label{
+    text-transform: uppercase;
+    width: 100%;
+}
+.form-container form input{
+    width: 85%;
+    border: 1px solid #55555544;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+

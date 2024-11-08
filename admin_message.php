@@ -1,5 +1,5 @@
 <?php
-include 'admin_header.php'
+include 'include/admin_header.php'
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +8,8 @@ include 'admin_header.php'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
 </head>
 <body>
 <div class="table-container">
@@ -37,7 +39,7 @@ include 'admin_header.php'
 </body>
 
         <?php 
-        include 'footer.php'
+        include 'include/footer.php'
         ?>
 
 </html>

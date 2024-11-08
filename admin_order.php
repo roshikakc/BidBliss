@@ -1,5 +1,5 @@
 <?php
-include 'admin_header.php'
+include 'include/admin_header.php'
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +8,8 @@ include 'admin_header.php'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
 </head>
 <body>
 <body>
@@ -21,8 +23,8 @@ include 'admin_header.php'
                     <th>Phone no.</th>
                     <th>Price</th>
                     <th>Address</th>
-                    <th>Total Order</th>
-                    <th>Pending</th>
+                    <th>Total Products</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +62,7 @@ include 'admin_header.php'
         <button class="delete-btn">Delete</button>
     </div>
 <?php
-include 'footer.php'
+include 'include/footer.php'
 ?>
 </body>
 </html>

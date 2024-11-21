@@ -59,56 +59,36 @@ if(isset($_POST['delete_id'])){
     ?>
     
     <div class="message">
-        <div class="mess-header">Orders</div>
+        <div class="mess-header">User</div>
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
                         <th>User ID</th>
                         <th>Username</th>
-                        <th>Placed on</th>
-                        <th>Phone no.</th>
-                        <th>Price</th>
-                        <th>Address</th>
-                        <th>Total Products</th>
-                        <th>Status</th>
-                        <th>Action</th>  <!--- updat/delete - -->
+                        <th>Email</th>
+                        <th>Action</th>
                         </tr>
                     </thead>
                 <tbody>
                 <?php
-                    $select_order = mysqli_query($conn, "SELECT * FROM `order`") or die('query failed');
-                    if (mysqli_num_rows($select_order) > 0) {
+                    $select_user = mysqli_query($conn, "SELECT * FROM `user`") or die('query failed');
+                    if (mysqli_num_rows($select_user) > 0) {
                         $counter=0;
-                    while ($fetch_order = mysqli_fetch_assoc($select_order)) {
+                    while ($fetch_user = mysqli_fetch_assoc($select_user)) {
                             ?>
                     <tr>
-                    <tr id="row-<?php echo $fetch_order['id']; ?>">
+                    <tr id="row-<?php echo $fetch_user['id']; ?>">
                         <td><?php echo ++$counter ?></</td>
-                        <td><?php echo $fetch_order['name']?></td>
-                        <td><?php echo $fetch_order['placed_on']?></td>
-                        <td><?php echo $fetch_order['number']?></td>
-                        <td><?php echo $fetch_order['total_price']?></td>
-                        <td><?php echo $fetch_order['address']?></td>
-                        <td><?php echo $fetch_order['total_product']?></td>
-                        <td><form method="POST">
-                            <select name="update_payment">
-                                <option disabled selected><?php echo $fetch_order['payment_status'];?></option>
-                                <option value="pending">Pending</option>
-                                <option value="complete">Complete</option>
-                            </select>
-                        </form></td>
+                        <td><?php echo $fetch_user['name']?></td>
+                        <td><?php echo $fetch_user['email']?></td>
                             <td>
-                            <select name="update_status">
-                                <option disabled selected><?php echo $fetch_order['action'];?></option>
-                                <option value="update">Update</option>
-                                <option value="delete">Delete</option>
-                                    <!-- <button class="delete-btn-msg"   data-id ="<?php echo $fetch_message['id']; ?>">Delete</button>  -->
+                                    <button class="delete-btn-msg"   data-id ="<?php echo $fetch_user['id']; ?>">Delete</button> 
                             </td>
                         </tr>
                         <?php }}else{?>
                             <tr>
-                                <td colspan="9 ">Data not found</td>
+                                <td colspan="4 ">Data not found</td>
                             </tr>
                          <?php } ?>
                     </tbody>
@@ -123,9 +103,9 @@ if(isset($_POST['delete_id'])){
         const rowId = $(this).data("id"); 
 
         // Confirm deletion
-        if (confirm("Are you sure you want to delete this message?")) {
+        if (confirm("Are you sure you want to delete this user?")) {
             $.ajax({
-                url: "admin_message.php", 
+                url: "", 
                 type: "POST",
                 data: {
                     delete_id: rowId 
@@ -135,11 +115,11 @@ if(isset($_POST['delete_id'])){
                     // If deletion was successful, remove the row from the table
                     $("#row-" + rowId).remove();
                 } else {
-                    alert("Failed to delete the message.");
+                    alert("Failed to delete the user.");
                 }
             },
             error: function () {
-                alert("An error occurred while deleting the message.");
+                alert("An error occurred while deleting the user.");
             }
         });
     }

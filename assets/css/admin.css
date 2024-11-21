@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,33 +9,55 @@
     font-style: normal;
 }
 
+/* html,body {
+    display: flex;
+    flex-direction: row;
+        height: 100%;
+        margin: 0;
+} */
+
 /* admin_page */
+
+.home-header {
+    padding: 20px;
+    align-items: center;
+    background: #fff;
+    color: #000000;
+    border-bottom: 1px solid #e0e4e8;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+}
+
 .info-cards {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 120px; 
+    flex-wrap: wrap;
+    gap: 120px;
     justify-content: center;
     padding: 15px 0 100px;
+    margin: 80px 0 ;
 }
 
 .card {
-    flex: 1 1 20%; 
-    max-width: 20%; 
-    min-height: 200px; 
-    background-color: #7091e6; 
-    border-radius: 15px; 
+    flex: 1 1 20%;
+    max-width: 20%;
+    min-height: 200px;
+    background-color: #7091e6;
+    border-radius: 15px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 8px rgb(132, 129, 129);
-    color: white; 
+    color: white;
     font-size: 18px;
     text-align: center;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
+
 .card:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
 }
 
 
@@ -46,12 +69,20 @@
 
 /* product-form */
 .product-form {
-    max-width: 600px;
+    width: auto;
     height: 550px;
-    margin: 2rem auto;
     background-color: #E6E4E4;
     padding: 1.5rem;
     border-radius: 12px;
+    margin-top: 40px;;
+}
+
+.product-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e4e8;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
 }
 
 .product-form label {
@@ -64,39 +95,120 @@
 }
 
 .product-form input[type="text"],
-.product-form textarea{
+.product-form textarea {
     width: 70%;
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: none;
-    background-color: #000; 
-    color: #fff; 
+    background-color: #000;
+    color: #fff;
     border-radius: 8px;
 }
+
 .product-form input[type="file"] {
     margin-bottom: 1rem;
-    border: none; 
-    background-color: transparent; 
-    color: #333; 
+    border: none;
+    background-color: transparent;
+    color: #333;
     width: auto;
     cursor: pointer;
 }
+
 .product-form button {
     width: 100%;
     padding: 0.5rem;
-    border: none; 
+    border: none;
     border-radius: 8px;
     background-color: black;
     color: white;
     cursor: pointer;
 }
+/* Container for the update form */
+.update-container .product-form-edit {
+    max-width: 50%;
+    margin: 2rem auto;
+    background-color: #E6E4E4; 
+    padding: 1rem;
+    text-align: center;
+    border-radius: 12px; 
+}
+
+
+/* Product header styling */
+.update-container .product-header {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-family: "Roboto", sans-serif;
+    color: #000; 
+}
+
+
+.update-container .product-form-edit label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-family: "Righteous", sans-serif;
+    font-size: 18px;
+    color: #000;
+}
+
+
+.update-container .product-form-edit input[type="text"],
+.update-container .product-form-edit input[type="number"],
+.update-container .product-form-edit textarea {
+    width: 100%; 
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #000; 
+    color: #fff;
+    font-size: 16px;
+}
+
+
+.update-container .product-form-edit textarea {
+    resize: none; 
+}
+
+.update-container .product-form-edit input[type="file"] {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Buttons */
+.update-container .product-form-edit .cancel-btn{
+    padding: 0.5rem;
+    border: none;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    text-transform: capitalize;
+
+}
+
+
 
 /* Product List */
 .product-list {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-top: 5rem;
+}
+
+
+.products-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .product-card {
@@ -107,7 +219,7 @@
     padding: 1rem;
     text-align: center;
     border-radius: 8px;
-    margin: 5rem;
+    margin: 4rem;
 }
 
 .product-card img {
@@ -117,28 +229,51 @@
     padding-top: 20px;
 }
 
-.product-card p {
-    margin: 1rem 0 ;
+.product-card p,
+.product-card details {
+    margin: 1rem 0;
 }
 
-.product-card button {
+.edit,
+.delete {
     background-color: #333;
     color: white;
     padding: 0.5rem;
     border: none;
     margin: 0.2rem;
+    text-transform: capitalize;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px ;
 }
 
+/* message */
 /* Table Container */
+.message {
+    width: 100%;
+    height: 100%;
+}
+
 .table-container {
     max-width: 90%;
-    margin: 5rem auto;
+    margin: 80px 80px;
     padding: 3rem;
     background-color: #e9e8e8;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.mess-header {
+    padding: 20px;
+    align-items: center;
+    background: #fff;
+    color: #000000;
+    border-bottom: 1px solid #e0e4e8;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
 }
 
 /* Table Styling */
@@ -158,20 +293,57 @@ thead th {
 tbody td {
     padding: 0.8rem;
     border-bottom: 1px solid #ddd;
+    text-align: center;
 }
 
-tbody tr{
+tbody tr {
     background-color: #ffffff;
     cursor: pointer;
 }
-tbody tr:hover{
+
+tbody tr:hover {
     background-color: rgb(235, 239, 243);
 }
 
+/* order */
+/* .order {
+    margin-left: 200px;
+} */
+
+.table-container-order {
+    padding: 3rem;
+    max-width: 100%;
+    background-color: #e9e8e8;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin: 50px;
+    flex-direction: column;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.order-header {
+    padding: 20px;
+    align-items: center;
+    background: #fff;
+    color: #000000;
+    border-bottom: 1px solid #e0e4e8;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+}
+
 /* Button Styling */
-.update-btn, .delete-btn {
+.update-btn,
+.delete-btn {
+    margin-top: 2rem;
     padding: 0.5rem 1rem;
-    margin: 20px 0 0 550px;
     font-size: 0.9rem;
     border: none;
     border-radius: 4px;
@@ -199,7 +371,6 @@ tbody tr:hover{
 
 .delete-btn-msg {
     padding: 0.5rem 1rem;
-    margin: 20px 0 0 550px;
     font-size: 0.9rem;
     border: none;
     border-radius: 4px;
@@ -208,46 +379,55 @@ tbody tr:hover{
     color: #ffffff;
 }
 
+.delete-btn-msg:hover {
+    background-color: #e53935;
+}
+
+
+
 /* Register page */
-a{
+a {
     text-decoration: none;
 }
 
-.btn{
-    padding: 0.8rem 2.5rem ;
+.btn {
+    padding: 0.8rem 2.5rem;
     text-transform: uppercase;
     background: black;
     color: white;
     border-radius: 10px;
     cursor: pointer;
 }
-.btn:hover{
+
+.btn:hover {
     background: rgb(77, 77, 77);
 }
 
-input{ 
+input {
     background: transparent;
 }
 
-input[type=submit]{
+input[type=submit] {
     cursor: pointer;
     background: black;
 }
 
-.form-container{
+.form-container {
     background: #9497ee;
     width: 100%;
     min-height: 100vh;
     padding: 4rem 0;
     position: relative;
 }
-.form-container h1{
+
+.form-container h1 {
     text-transform: uppercase;
     margin: 2rem 0;
     font-size: 2.3rem;
     text-align: center;
 }
-.form-container form{
+
+.form-container form {
     width: 60%;
     margin: 1rem auto;
     background: rgb(255 255 255/80%);
@@ -256,11 +436,13 @@ input[type=submit]{
     position: relative;
     border-radius: 5px;
 }
-.form-container label{
+
+.form-container label {
     text-transform: uppercase;
     width: 100%;
 }
-.form-container form input{
+
+.form-container form input {
     width: 85%;
     border: 1px solid #55555544;
     padding: 1rem 1.5rem;
@@ -268,4 +450,20 @@ input[type=submit]{
     margin: 1rem 0;
 }
 
+.message1{
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 59%;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    background: #000;
+    color: #fff;
+}
 
+.message1 i{
+    cursor: pointer;
+}

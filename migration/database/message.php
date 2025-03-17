@@ -1,6 +1,5 @@
-
 <?php 
-require_once "../../database.php";
+require_once './../migration.php';
 
 $table_name="message";
 $sql = 

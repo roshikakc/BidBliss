@@ -1,5 +1,5 @@
 <?php
-$localhost ="localhost";
+$localhost ="127.0.0.1:3307";
 $username ="root";
 $password ="";
 $database ="bidbliss";

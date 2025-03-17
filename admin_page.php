@@ -3,16 +3,16 @@ include_once './Include/admin_header.php';
 
 include 'database.php';
 // session_start();
-$admin_id =$_SESSION['admin_name'];
+$admin_id =$_SESSION['admin_id'];
 
  if (!isset($admin_id)) {
-    header('location:login.php');
+    header('location:ad-login.php');
     exit;
 }
 
 if (isset($_POST['logout'])) {
     session_destroy();
-    header('location:login.php');
+    header('location:ad-login.php');
   exit;
 }
 
@@ -25,74 +25,72 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/admin.css">
     <title>Home</title>
+  
 </head>
 <body>
-<div class="home">
-        <div class="home-header">Home</div>
+<div class="dynamic-content home">
+    <div class="home-header">Dashboard</div>
     <section class="info-cards">
         <div class="card">
+        <a href="admin_product.php">
             <?php
-            $total_pending =0;
-            $select_pendings = mysqli_query($conn, "SELECT * FROM `order` WHERE payment_status = 'pending' ")
-            or die('query failed');
-            while ($fetch_pending = mysqli_fetch_assoc($select_pendings)){
-                $total_pending +=$fetch_pending['total_price'];
-            }
+            // Count total products
+            $select_products = mysqli_query($conn, "SELECT * FROM `products`") or die('Query failed');
+            $num_of_products = mysqli_num_rows($select_products);
             ?>
-            <h3>Rs <?php echo $total_pending;?>/-</h3>
-            <br><p>total pending</p>
-            </div>
+            <h3><?php echo $num_of_products; ?></h3>
+            <br><p>Total Products</p>
+        </a>
+        </div>
 
         <div class="card">
+        <a href="admin_order.php">
             <?php
-            $total_completed =0;
-            $select_completed = mysqli_query($conn, "SELECT * FROM `order` WHERE payment_status = 'complete' ")
-            or die('query failed');
-            while ($fetch_completed = mysqli_fetch_assoc($select_completed)){
-                $total_completed +=$fetch_completed['total_price'];
-            }
+            // Count total orders
+            $select_orders = mysqli_query($conn, "SELECT * FROM `orders`") or die('Query failed');
+            $num_of_orders = mysqli_num_rows($select_orders);
             ?>
-            <h3>Rs <?php echo $total_completed;?>/-</h3>
-            <br><p>total completed</p>
-            </div>
+            <h3><?php echo $num_of_orders; ?></h3>
+            <br><p>Total Orders</p>
+        </a>
+        </div>
 
         <div class="card">
+        <a href="admin_user.php">
             <?php
-            $select_order = mysqli_query($conn, "SELECT * FROM `order`")
-            or die('query failed');
-            $num_of_order = mysqli_num_rows($select_order);
+            // Count total users
+            $select_users = mysqli_query($conn, "SELECT * FROM `user`") or die('Query failed');
+            $num_of_users = mysqli_num_rows($select_users);
             ?>
-            <h3><?php echo $num_of_order;?></h3>
-            <br><p>order placed</p>
-            </div>
-
-            
-        <div class="card">
-            <?php
-            $select_product = mysqli_query($conn, "SELECT * FROM `order`")
-            or die('query failed');
-            $num_of_product = mysqli_num_rows($select_product);
-            ?>
-            <h3><?php echo $num_of_product;?></h3>
-            <br><p>product added</p>
-            </div>
-
-
-        <div class="card">
-            <?php
-            $select_message = mysqli_query($conn, "SELECT * FROM `message`")
-            or die('query failed');
-            $num_of_message = mysqli_num_rows($select_message);
-            ?>
-            <h3><?php echo $num_of_message;?></h3>
-            <br><p>new messages</p>
-            </div>
-
-        
-
-    </div>
+            <h3><?php echo $num_of_users; ?></h3>
+            <br><p>Total Users</p>
+        </a>
+        </div>
     </section>
+</div>
 
+   
+    <!-- <script>
+    // Select necessary elements
+    const sidebar = document.querySelector(".sidebar");
+    const home = document.querySelector(".home");
+    const toggleBtn = document.querySelector("#btn");
+
+    // Sidebar toggle event
+    toggleBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+
+        // Adjust the home element dynamically
+        if (sidebar.classList.contains("open")) {
+            home.style.marginLeft = "200px"; // Sidebar's expanded width
+            home.style.width = "calc(100% - 200px)";
+        } else {
+            home.style.marginLeft = "78px"; // Sidebar's collapsed width
+            home.style.width = "calc(100% - 78px)";
+        }
+    });
+</script> -->
+<script src="./assets/js/script.js"></script>
 </body>
 </html>
  

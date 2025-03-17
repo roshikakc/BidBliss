@@ -2,39 +2,40 @@
 include 'database.php';
 session_start();
 
-if(isset($_POST['submit-btn'])){
-    $email=mysqli_real_escape_string($conn,$_POST['email']);
-    $password=mysqli_real_escape_string($conn,md5($_POST['password']) );
+if (isset($_POST['submit-btn'])) {
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, md5($_POST['password']));
 
-    $select_users=mysqli_query($conn,"SELECT * FROM `user` WHERE email='$email' AND password='$password'") or die('query failed');
+    $select_users = mysqli_query($conn, "SELECT * FROM `user` WHERE email='$email' AND password='$password'") or die('Query failed');
 
-    if(mysqli_num_rows($select_users) > 0){
-        $row =mysqli_fetch_assoc($select_users);
+    if (mysqli_num_rows($select_users) > 0) {
+        $row = mysqli_fetch_assoc($select_users);
+        echo "User type: " . $row['user_type'];
+
+        // Check user type
+        if ($row['user_type'] == 'admin') {
+            $_SESSION['admin_name'] = $row['user_name'];
+            $_SESSION['admin_email'] = $row['email'];
+            $_SESSION['admin_id'] = $row['user_id'];
+
+            // Redirect to admin page
+            header('location:admin_page.php');
+            exit;
+        }
+         elseif ($row['user_type'] == 'user') {
+            $_SESSION['user_name'] = $row['user_name'];
+            $_SESSION['user_email'] = $row['email'];
+            $_SESSION['user_id'] = $row['user_id'];
+
+            // Redirect to user homepage
+            header('location:user/homepage.php');
+            exit;
+        }
+    } else {
+        $message[] = 'Incorrect email or password';
         
-       if($row['user_type']== 'admin'){
-        $_SESSION['admin_name']=$row['name'];
-        $_SESSION['admin_email']=$row['email'];
-        $_SESSION['admin_id']=$row['id'];
-        // echo "admin";
-        
-        header('location:admin_page.php');
-        exit;
-       }
-    //    else if($row['user_type']== 'user'){
-    //     $_SESSION['user_name']=$row['name'];
-    //     $_SESSION['user_email']=$row['email'];
-    //     $_SESSION['user_id']=$row['id'];
-    //     // echo "user";
-        
-    //     header('location:in.php');
-    //     exit;}
-    else{
-        $message[]= 'incorrect email or password';
-       }
-    }    
-       
+    }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +44,7 @@ if(isset($_POST['submit-btn'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <?php

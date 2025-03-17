@@ -9,14 +9,24 @@
     font-style: normal;
 }
 
-/* html,body {
-    display: flex;
-    flex-direction: row;
-        height: 100%;
-        margin: 0;
-} */
+p {
+    font-size: 16px;
+    margin: 15px 0 20px 0;
+}
 
 /* admin_page */
+.dynamic-content {
+    position: relative;
+    margin-left: 78px; /* Start aligned with collapsed sidebar */
+    width: calc(100% - 78px); /* Adjust width based on sidebar */
+    transition: margin-left 0.5s ease, width 0.5s ease;
+}
+
+.sidebar.open~.dynamic-content {
+    left: 200px; /* Adjust for expanded sidebar */
+    width: calc(100% - 200px);
+}
+
 
 .home-header {
     padding: 20px;
@@ -24,53 +34,147 @@
     background: #fff;
     color: #000000;
     border-bottom: 1px solid #e0e4e8;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
     font-size: 50px;
 }
 
+/* dashboard */
+/* Container for cards */
 .info-cards {
+    margin-top: 30px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 120px;
+    gap: 40px;
     justify-content: center;
-    padding: 15px 0 100px;
-    margin: 80px 0 ;
+    flex-wrap: wrap;
 }
 
+/* Individual card styling */
 .card {
-    flex: 1 1 20%;
-    max-width: 20%;
-    min-height: 200px;
-    background-color: #7091e6;
-    border-radius: 15px;
+    background: #242773;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* min-width: 200px; */
+    max-width: 500px;
+    flex: 1;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Make the entire card clickable */
+.card a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgb(132, 129, 129);
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
     color: white;
-    font-size: 18px;
-    text-align: center;
-    transition: transform 0.3s ease;
-    cursor: pointer;
 }
 
+/* Heading inside the card */
+.card h3 {
+    font-size: 22px;
+    margin: 0;
+    color: #fff;
+}
+
+/* Paragraph inside the card */
+.card p {
+    font-size: 16px;
+    color: #fff;
+}
+
+/* Hover effect */
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background: #3b3fc4;
 }
 
 
-.card-detail {
-    font-size: 18px;
-    color: white;
-    padding: 20px;
+/* products */
+.single-card {
+    position: relative;
+    width: 280px;
+    margin: 15px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    background: #000235;
+    color: #fff;
+    border-radius: 15px;
+    transition: all 0.8s ease-in-out;
 }
+
+.single-card:hover {
+    transform: translateY(-10px);
+}
+
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+}
+
+.img-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.img-area:hover img {
+    transform: scale(1.1);
+}
+
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+}
+
+.info {
+    padding: 10px;
+    text-align: center;
+    color: #ddd;
+}
+
+.info h3 {
+    margin: 15px 0 10px;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: bebas neue;
+}
+
+.tab-content {
+    margin-top: 80px;
+}
+
+
 
 /* product-form */
+.product{
+    position: relative;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+}
+
+/* .sidebar.open~.product{
+    left: 200px;
+    width: calc(100% - 200px);
+} */
+
+
+
 .product-form {
-    width: auto;
-    height: 550px;
+    width: 70%;
     background-color: #E6E4E4;
     padding: 1.5rem;
     border-radius: 12px;
@@ -100,8 +204,8 @@
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: none;
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     border-radius: 8px;
 }
 
@@ -114,8 +218,16 @@
     cursor: pointer;
 }
 
+#auctionType,
+#productCategory{
+    display: block;
+    padding: 0.75rem;
+    border-radius: 8px;;
+}
+
 .product-form button {
     width: 100%;
+    margin-top: 20px;
     padding: 0.5rem;
     border: none;
     border-radius: 8px;
@@ -123,6 +235,7 @@
     color: white;
     cursor: pointer;
 }
+
 /* Container for the update form */
 .update-container .product-form-edit {
     max-width: 50%;
@@ -211,29 +324,6 @@
     align-items: center;
 }
 
-.product-card {
-    background-color: #050a44;
-    color: white;
-    width: 300px;
-    height: 450px;
-    padding: 1rem;
-    text-align: center;
-    border-radius: 8px;
-    margin: 4rem;
-}
-
-.product-card img {
-    width: 90%;
-    height: 60%;
-    border-radius: 5px;
-    padding-top: 20px;
-}
-
-.product-card p,
-.product-card details {
-    margin: 1rem 0;
-}
-
 .edit,
 .delete {
     background-color: #333;
@@ -245,6 +335,14 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px ;
+}
+
+.edit:hover{
+    background-color: rgb(127, 197, 23);
+}
+
+.delete:hover{
+    background-color: rgb(247, 34, 34);
 }
 
 /* message */
@@ -275,40 +373,193 @@
     font-weight: 500;
     font-size: 50px;
 }
-
-/* Table Styling */
+/* Table Styles */
 table {
     width: 100%;
-    background-color: #494949;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-thead th {
+table th, table td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
     background-color: #000235;
-    color: #ffffff;
-    padding: 1rem;
-    text-align: center;
+    color: white;
+    text-transform: uppercase;
+}
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:hover {
+    background-color: #e3e3e3;
+  }
+  
+  td, th {
+    padding: 12px;
+    text-align: left;
     border-bottom: 1px solid #ddd;
+  }
+  
+
+/* user Styling */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
 }
 
-tbody td {
-    padding: 0.8rem;
-    border-bottom: 1px solid #ddd;
+.single-card1 {
+    position: relative;
+    width: 280px;
+    margin: 15px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    background: #000235;
+    color: #fff;
+    border-radius: 15px;
+    transition: all 0.8s ease-in-out;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.single-card1:hover,
+.single-card-1:hover {
+    transform: translateY(-10px);
+}
+
+.img-area1 {
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 20px auto; /* Center the image */
+    border: 3px solid #fff; /* Optional border */
+}
+
+.img-area1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.info1 {
+    padding: 15px;
+}
+
+.info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 14px;
+    color: #ddd;
+}
+
+/* edit user */
+.img-area-1 {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 20px auto;
+    border: 3px solid #fff;
+}
+
+.img-area-1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-1 {
     text-align: center;
 }
 
-tbody tr {
-    background-color: #ffffff;
+.info-1 input {
+    width: 80%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #fff;
+}
+
+.submit-btn-msg,
+.reset-btn-msg {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 40px 5px;
+    border: none;
+    border-radius: 5px;
+    background: orangered;
+    color: white;
     cursor: pointer;
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
-tbody tr:hover {
-    background-color: rgb(235, 239, 243);
+.submit-btn-msg:hover {
+    background: darkred;
 }
+
+.reset-btn-msg:hover {
+    background: grey;
+}
+
+.single-card-1 {
+    width: 280px;
+    padding: 20px;
+    background: #000235;
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Pushes content apart */
+    gap: 15px;
+    min-height: 400px; /* Ensures the card is tall enough */
+    position: relative;
+}
+
+.view-btn-msg {
+    text-align: center;
+    padding: 10px;
+    background-color: orangered;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: absolute;
+    bottom: 15px; /* Pushes button to the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Centers button horizontally */
+}
+
+.view-btn-msg:hover {
+    background-color: darkred;
+}
+
+
+
 
 /* order */
-/* .order {
-    margin-left: 200px;
-} */
 
 .table-container-order {
     padding: 3rem;
@@ -369,7 +620,10 @@ tbody tr:hover {
     background-color: #e53935;
 }
 
-.delete-btn-msg {
+.delete-btn-msg,
+.edit-btn-msg,
+.submit-btn-msg,
+.reset-btn-msg {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     border: none;
@@ -465,5 +719,6 @@ input[type=submit] {
 }
 
 .message1 i{
+    color: #fff;
     cursor: pointer;
 }

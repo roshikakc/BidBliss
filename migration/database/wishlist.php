@@ -1,6 +1,5 @@
 
 <?php 
-require_once "../../database.php";
 
 $table_name="wishlist";
 $sql = 

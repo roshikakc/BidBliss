@@ -3,31 +3,45 @@ include_once 'include/admin_header.php';
 
 include 'database.php';
 // session_start();
-$admin_id =$_SESSION['admin_name'];
+$admin_id = $_SESSION['admin_name'];
 
- if (!isset($admin_id)) {
-    header('location:login.php');
+if (!isset($admin_id)) {
+    header('location:ad-login.php');
     exit;
 }
 
 if (isset($_POST['logout'])) {
     session_destroy();
-    header('location:login.php');
-  exit;
+    header('location:ad-login.php');
+    exit;
 }
 
 
 //delete products from database
-
-if(isset($_POST['delete_id'])){
-    $delete_id = $_POST['delete_id'];
-    $deleteSql = mysqli_query($conn,"DELETE FROM `message` WHERE id = '$delete_id'");
-    if (mysqli_affected_rows($conn)>0) {
-        echo "success";
-    } else {
-        echo "failed";
+if ($conn) {
+    function getData($conn)
+    {
+        $dataSql = "SELECT * FROM user";
+        $dataResult = $conn->query($dataSql);
+        return $dataResult;
     }
-    exit;
+    $dataResult = getData($conn);
+
+
+    // print_r($dataResult->num_rows );
+
+
+    if (isset($_POST['delete'])) {
+        $delete_id = $_POST['delete'];
+        $deleteSql = "DELETE FROM user WHERE user_id = $delete_id";
+        $res = $conn->query($deleteSql);
+        if ($res) {
+            echo "data has been deleted";
+            $dataResult = getData($conn);
+        } else {
+            echo "data not has been deleted";
+        }
+    }
 }
 
 ?>
@@ -45,7 +59,7 @@ if(isset($_POST['delete_id'])){
 </head>
 
 <body>
-<?php
+    <?php
     if (isset($message)) {
         foreach ($message as $message) {
             echo '
@@ -57,74 +71,41 @@ if(isset($_POST['delete_id'])){
         }
     }
     ?>
-    
-    <div class="message">
+
+    <div class="dynamic-content home">
         <div class="mess-header">User</div>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                        </tr>
-                    </thead>
-                <tbody>
-                <?php
-                    $select_user = mysqli_query($conn, "SELECT * FROM `user`") or die('query failed');
-                    if (mysqli_num_rows($select_user) > 0) {
-                        $counter=0;
-                    while ($fetch_user = mysqli_fetch_assoc($select_user)) {
-                            ?>
-                    <tr>
-                    <tr id="row-<?php echo $fetch_user['id']; ?>">
-                        <td><?php echo ++$counter ?></</td>
-                        <td><?php echo $fetch_user['name']?></td>
-                        <td><?php echo $fetch_user['email']?></td>
-                            <td>
-                                    <button class="delete-btn-msg"   data-id ="<?php echo $fetch_user['id']; ?>">Delete</button> 
-                            </td>
-                        </tr>
-                        <?php }}else{?>
-                            <tr>
-                                <td colspan="4 ">Data not found</td>
-                            </tr>
-                         <?php } ?>
-                    </tbody>
-                </table>
+        <div class="card-container">
+            <?php if ($dataResult->num_rows > 0) {
+                while ($row = $dataResult->fetch_assoc()) { ?>
+                    <div class="single-card1" style="height: 350px;">
+                        <div class="img-area1">
+                        <img src="./image/<?php echo htmlspecialchars($row['profile_image']); ?>" alt="Profile Image">
+
+                        </div>
+                        <div class="info1">
+                            <h3><?php echo htmlspecialchars($row['user_name']); ?></h3>
+                            <p>Email: <?php echo htmlspecialchars($row['email']); ?></p>
+                            <p>User ID: <?php echo htmlspecialchars($row['user_id']); ?></p>
+
+                            <a href="./edit.php?id=<?php echo $row['user_id']; ?>" class="edit">Edit</a>
+                            <a href="profile.php?delete=<?php echo $row['user_id']; ?>" class="delete" onclick="return confirm('Want to delete this user?');">Delete</a>
+                        </div>
+                    </div>
+                <?php }
+            } else { ?>
+                <div class="empty">
+                    <p>No users found!</p>
+                </div>
+            <?php } ?>
         </div>
+
+
     </div>
 
-    <script>
-        $(document).on("click", ".delete-btn-msg", function (e) {
-        e.preventDefault(); 
 
-        const rowId = $(this).data("id"); 
 
-        // Confirm deletion
-        if (confirm("Are you sure you want to delete this user?")) {
-            $.ajax({
-                url: "", 
-                type: "POST",
-                data: {
-                    delete_id: rowId 
-                },
-                success: function (response) {
-                    if (response === "success") {
-                    // If deletion was successful, remove the row from the table
-                    $("#row-" + rowId).remove();
-                } else {
-                    alert("Failed to delete the user.");
-                }
-            },
-            error: function () {
-                alert("An error occurred while deleting the user.");
-            }
-        });
-    }
-    });
-    </script>
+    <script src="./assets/js/script.js"></script>
+
 </body>
 
 </html>

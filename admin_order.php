@@ -1,18 +1,18 @@
 <?php
-include_once 'include/admin_header.php';
+include_once './Include/admin_header.php';
 
 include 'database.php';
 // session_start();
 $admin_id =$_SESSION['admin_name'];
 
  if (!isset($admin_id)) {
-    header('location:login.php');
+    header('location:ad-login.php');
     exit;
 }
 
 if (isset($_POST['logout'])) {
     session_destroy();
-    header('location:login.php');
+    header('location:ad-login.php');
   exit;
 }
 
@@ -58,93 +58,66 @@ if(isset($_POST['delete_id'])){
     }
     ?>
     
-    <div class="message">
+    <div class="dynamic-content home">
         <div class="mess-header">Orders</div>
         <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Username</th>
-                        <th>Placed on</th>
-                        <th>Phone no.</th>
-                        <th>Price</th>
-                        <th>Address</th>
-                        <th>Total Products</th>
-                        <th>Status</th>
-                        <th>Action</th>  <!--- updat/delete - -->
-                        </tr>
-                    </thead>
-                <tbody>
+        <table>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Customer Name</th>
+                    <th>Customer Address</th>
+                    <th>Customer Phone</th>
+                    <th>Status</th>
+                    <th>Seller Username</th>
+                </tr>
+
                 <?php
-                    $select_order = mysqli_query($conn, "SELECT * FROM `order`") or die('query failed');
-                    if (mysqli_num_rows($select_order) > 0) {
-                        $counter=0;
-                    while ($fetch_order = mysqli_fetch_assoc($select_order)) {
-                            ?>
-                    <tr>
-                    <tr id="row-<?php echo $fetch_order['id']; ?>">
-                        <td><?php echo ++$counter ?></</td>
-                        <td><?php echo $fetch_order['name']?></td>
-                        <td><?php echo $fetch_order['placed_on']?></td>
-                        <td><?php echo $fetch_order['number']?></td>
-                        <td><?php echo $fetch_order['total_price']?></td>
-                        <td><?php echo $fetch_order['address']?></td>
-                        <td><?php echo $fetch_order['total_product']?></td>
-                        <td><form method="POST">
-                            <select name="update_payment">
-                                <option disabled selected><?php echo $fetch_order['payment_status'];?></option>
-                                <option value="pending">Pending</option>
-                                <option value="complete">Complete</option>
-                            </select>
-                        </form></td>
-                            <td>
-                            <select name="update_status">
-                                <option disabled selected><?php echo $fetch_order['action'];?></option>
-                                <option value="update">Update</option>
-                                <option value="delete">Delete</option>
-                                    <!-- <button class="delete-btn-msg"   data-id ="<?php echo $fetch_message['id']; ?>">Delete</button>  -->
-                            </td>
-                        </tr>
-                        <?php }}else{?>
-                            <tr>
-                                <td colspan="9 ">Data not found</td>
-                            </tr>
-                         <?php } ?>
-                    </tbody>
-                </table>
+                // Fetch orders that belong to the current seller
+                
+                $query = "
+                SELECT o.order_id, p.product_name, p.product_latest_price, o.customer_name, 
+                       o.customer_address, o.customer_phone, o.status, 
+                       u.user_name AS seller_name  
+                FROM orders o
+                JOIN products p ON o.product_id = p.product_id
+                JOIN user u ON p.user_id = u.user_id  -- Ensure this join is included to fetch seller info
+            ";
+            
+
+            
+            $order_result = mysqli_query($conn, $query) or die("Query Failed: " . mysqli_error($conn));
+
+                if (mysqli_num_rows($order_result) > 0) {
+                    while ($order = mysqli_fetch_assoc($order_result)) {
+                        echo "<tr>
+                    <td>{$order['order_id']}</td>
+                    <td>{$order['product_name']}</td>
+                    <td>Rs {$order['product_latest_price']}</td>
+                    <td>{$order['customer_name']}</td>
+                     
+                    <td>{$order['customer_address']}</td>
+                    <td>{$order['customer_phone']}</td>
+                    <td>{$order['status']}</td>
+                    <td>" .( isset($order['seller_name']) ? $order['seller_name'] : 'N/A') . "</td>
+
+                </tr>";
+                    }
+                } else {
+                    echo '
+            <tr>
+                <td colspan="7">No orders found for your products.</td>
+            </tr>';
+                }
+                ?>
+            </table>
         </div>
     </div>
 
-    <script>
-        $(document).on("click", ".delete-btn-msg", function (e) {
-        e.preventDefault(); 
+    
 
-        const rowId = $(this).data("id"); 
-
-        // Confirm deletion
-        if (confirm("Are you sure you want to delete this message?")) {
-            $.ajax({
-                url: "admin_message.php", 
-                type: "POST",
-                data: {
-                    delete_id: rowId 
-                },
-                success: function (response) {
-                    if (response === "success") {
-                    // If deletion was successful, remove the row from the table
-                    $("#row-" + rowId).remove();
-                } else {
-                    alert("Failed to delete the message.");
-                }
-            },
-            error: function () {
-                alert("An error occurred while deleting the message.");
-            }
-        });
-    }
-    });
-    </script>
+<script src="./assets/js/script.js"></script>
 </body>
 
 </html>

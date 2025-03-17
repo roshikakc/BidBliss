@@ -17,9 +17,9 @@ if(isset($_POST['submit-btn'])){
             $message[]='Wrong password!';
         }
         else{
-            mysqli_query($conn,"INSERT INTO `user`(name,email, password) VALUES('$name','$email','$password')") or die('query failed');
+            mysqli_query($conn,"INSERT INTO `user`(user_name,email, password) VALUES('$name','$email','$password')") or die('query failed');
             $message[]='Registered Successfully!';
-            header('location:login.php');
+            header('location:ad-login.php');
         }
         
     }
@@ -56,7 +56,7 @@ if(isset($_POST['submit-btn'])){
             <input type="password" name="password" placeholder="enter your password" required>
             <input type="password" name="cpassword" placeholder="conform your password" required>
             <input type="submit" name="submit-btn" value="register now" class="btn">
-            <p>already have an account? <a href="login.php">login now</a></p>
+            <p>already have an account? <a href="ad-login.php">login now</a></p>
         </form>
     </section>
 </body>
